@@ -5,8 +5,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.injung.domain.UserVO;
-import com.injung.dto.LoginDTO;
 import com.injung.persistence.UserDAO;
+
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -21,20 +21,20 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public UserVO login(UserVO vo) throws Exception {
-		
-		return dao.get(vo.getId(),vo.getPassword());
+		UserVO userVO = dao.get( vo );
+		return userVO;
 	}
 
 	@Override
 	public UserVO getUser(Long no) throws Exception {
-		
-		return dao.getNo(no);
+		UserVO userVO = dao.getNo( no );
+		return userVO;
 	}
 
 	@Override
 	public UserVO getUser(String id) throws Exception {
-		
-		return dao.getId(id);
+		UserVO userVO = dao.getId( id );
+		return userVO;
 	}
 
 	@Override
@@ -44,8 +44,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public UserVO checkId(String id) throws Exception {
-		
-		return dao.getId(id);
+		UserVO userVO = dao.getId(id);
+		return userVO;
 	}
 
 	@Override
@@ -54,9 +54,5 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
-	@Override
-	public UserVO login(LoginDTO dto) throws Exception {
-		return dao.login(dto);
-	}
 
 }

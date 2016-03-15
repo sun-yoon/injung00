@@ -12,5 +12,6 @@
 </head>
 <body>
 <h1> 로그인 성공~~~</h1>
+<a href="/user/modifyform">Modify</a>
 </body>
 </html>

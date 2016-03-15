@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.injung.domain.UserVO;
-import com.injung.dto.LoginDTO;
+
 
 @Repository
 public class UserDAOImpl implements UserDAO{
@@ -28,21 +28,19 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public UserVO getNo(Long no)throws Exception{
 	
-		return session.selectOne(namespace+".selectByNo", no);
+		return session.selectOne(namespace+".getNo", no);
 	}
 
 	@Override
 	public UserVO getId(String id)throws Exception{
 		
-		return session.selectOne(namespace+".selectById",id);
+		return session.selectOne(namespace+".getId",id);
 	}
 
 	@Override
-	public UserVO get(String id, String password)throws Exception{
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "id", id );
-		map.put( "password", password );
-		return session.selectOne(namespace+".selectByNoAndPassword",map);
+	public UserVO get(UserVO vo )throws Exception{
+		UserVO userVO = session.selectOne(namespace+".get",vo);
+		return userVO;
 	}
 
 	@Override
@@ -57,9 +55,6 @@ public class UserDAOImpl implements UserDAO{
 		
 	}
 
-	@Override
-	public UserVO login(LoginDTO dto) throws Exception {
-		return session.selectOne(namespace+".login", dto);
-	}
+
 
 }

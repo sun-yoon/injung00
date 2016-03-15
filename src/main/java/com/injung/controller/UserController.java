@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.injung.domain.UserVO;
-import com.injung.dto.LoginDTO;
 import com.injung.service.UserService;
 
 @Controller
@@ -57,31 +56,19 @@ public class UserController {
 	@ResponseBody
 	public Object checkid(@RequestParam("id") String id) throws Exception{
 		System.out.println(id);
-		UserVO userVo = service.checkId(id);
+		UserVO userVO = service.checkId(id);
 		Map<String, Object>map = new HashMap<String, Object>();
 		map.put("result", "success");
-		map.put("data", userVo !=null);
+		map.put("data", userVO !=null);
 		return map;
 	}
 	
 	@RequestMapping( value="/loginform", method = RequestMethod.GET )
-	public void loginform(@ModelAttribute("dto") LoginDTO dto) throws Exception {
+	public void loginform() throws Exception {
 	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public void login(LoginDTO dto, HttpSession session, Model model) throws Exception {
-		
-		UserVO vo = service.login(dto);
-		
-		if(vo == null){
-			return ;
-		}
-		model.addAttribute("UserVO", vo);
-		   
-		}
-	
-	
 
+	
+}
 	
 //	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 //	public void modify(@RequestParam("no")int no,@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
@@ -95,4 +82,4 @@ public class UserController {
 //		model.addAttribute( "vo", vo );
 //		return "/user/modifyform";
 //	}
-}
+//}

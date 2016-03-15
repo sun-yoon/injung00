@@ -1,7 +1,7 @@
 package com.injung.service;
 
 import com.injung.domain.UserVO;
-import com.injung.dto.LoginDTO;
+
 
 public interface UserService {
 
@@ -12,7 +12,7 @@ public interface UserService {
 	public void modify(UserVO vo)throws Exception;
 	public UserVO checkId(String id)throws Exception;
 	public void remove(String id)throws Exception;
-	public UserVO login(LoginDTO dto)throws Exception;
+	
 
 	
 }

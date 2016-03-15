@@ -37,11 +37,35 @@
 		]]>					
 	</select>
 	
-	<select id="login" parameterType="string" resultType="UserVO">
+	<update id="update"  parameterType="UserVo" >
 		<![CDATA[
-		select  id, password, name 
-		  from member
-		 where id = #{id } and password = #{password }
-		]]>					
-	</select>
+		update member2 
+		   set id = #{id },
+		]]>
+
+		<if test="password != ''">
+		<![CDATA[	
+					password = #{password },
+		]]>
+		</if>
+		<![CDATA[	   
+			   birthDate = #{birthDate },
+		]]> 
+		<![CDATA[	   
+			   email = #{email },
+			   ]]> 
+		<![CDATA[	   
+			   name = #{name },
+			   ]]>  
+		<![CDATA[	   
+			   age = #{age },
+			   ]]>  
+		<![CDATA[	   
+			   phone = #{phone }
+			  
+		 where no = #{no } 
+		]]>
+	</update>
+	
+	
 </mapper>
