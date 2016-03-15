@@ -38,11 +38,6 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void modify(UserVO vo) throws Exception {
-		dao.update(vo);
-	}
-
-	@Override
 	public UserVO checkId(String id) throws Exception {
 		UserVO userVO = dao.getId(id);
 		return userVO;
@@ -54,5 +49,8 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
-
+	@Override
+	public void modify(UserVO vo) throws Exception {
+		dao.update(vo);
+	}
 }

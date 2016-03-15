@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.injung.domain.UserVO;
@@ -66,10 +67,27 @@ public class UserController {
 	@RequestMapping( value="/loginform", method = RequestMethod.GET )
 	public void loginform() throws Exception {
 	}
+	
+	@RequestMapping( value="/remove", method = RequestMethod.GET )
+	public String remove(HttpSession session, Model model) throws Exception {
+		UserVO authUser = (UserVO) session.getAttribute("authUser");
+		System.out.println(authUser.getId());
+		service.remove(authUser.getId());
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	@RequestMapping( value="/modifyform", method = RequestMethod.GET )
+	public String modifyform(HttpSession session, Model model) throws Exception {
+		UserVO authUser = (UserVO) session.getAttribute("authUser");
+		System.out.println(authUser.getId());
+		service.remove(authUser.getId());
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 
-	
-}
-	
+//	
 //	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 //	public void modify(@RequestParam("no")int no,@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 //		model.addAttribute(service.read(no));
@@ -82,4 +100,4 @@ public class UserController {
 //		model.addAttribute( "vo", vo );
 //		return "/user/modifyform";
 //	}
-//}
+}

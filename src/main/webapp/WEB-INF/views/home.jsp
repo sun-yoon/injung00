@@ -1,17 +1,28 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<input type="hidden" name="no" value="${userVO.no }">
 
-
-<html>
-<head>
-	<title>Home</title>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<link href="/injung/assets/css/user.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-<h1> 로그인 성공~~~</h1>
-<a href="/user/modifyform">Modify</a>
-</body>
-</html>
+		<div id="header">
+		
+		<a href="/">
+		<img id="profile" src="http://www.jun.co.jp/files/img/company/detail_kitsune/logo_l_kitsune.gif" >
+		</a>
+			
+			<ul>
+				<c:choose>
+					<c:when test='${empty authUser }'>
+						<li><a href="/user/loginform">로그인</a></li>
+						<li><a href="/user/joinform">회원가입</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="/user/modifyform">회원정보수정</a></li>
+						<li><a href="/user/remove">회원탈퇴</a></li>
+						<li><a href="/user/logout">로그아웃</a></li>
+						<li>${authUser.name }is member.</li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>

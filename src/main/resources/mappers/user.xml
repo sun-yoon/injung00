@@ -37,6 +37,10 @@
 		]]>					
 	</select>
 	
-	
+	<delete id="delete"  parameterType="string" >
+		<![CDATA[
+		delete from member where mem_id = #{id }
+		]]>					
+	</delete>
 	
 </mapper>
