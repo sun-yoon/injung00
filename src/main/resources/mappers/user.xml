@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+
+<insert id="create" parameterType="UserVO">
+		<![CDATA[
+		  insert
+		  into member 
+	       values (no_seq.nextval, #{id }, #{password }, #{name }, #{email }, #{gender }, #{birthDate } )	
+		]]>
+	</insert>
+	
+	<select id="get" parameterType="map" resultType="UserVO">
+		<![CDATA[
+		select no, id, name, email, gender, birthDate
+		  from member
+		 where id = #{id }
+		   and password = #{password }
+		]]>					
+	</select>
+
+	<select id="getNo" parameterType="long" resultType="UserVO">
+		<![CDATA[
+		select  no, id, name, email, gender, birthDate
+		  from member
+		 where no = #{no }
+		]]>					
+	</select>
+
+	<select id="getId" parameterType="string" resultType="UserVO">
+		<![CDATA[
+		select  no, id, name, email, gender, birthDate
+		  from member
+		 where id = #{id }
+		]]>					
+	</select>
+	
+	<select id="login" parameterType="string" resultType="UserVO">
+		<![CDATA[
+		select  id, password, name 
+		  from member
+		 where id = #{id } and password = #{password }
+		]]>					
+	</select>
+</mapper>
