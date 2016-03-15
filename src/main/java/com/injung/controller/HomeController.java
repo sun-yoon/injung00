@@ -36,4 +36,9 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/user/mypage", method = RequestMethod.GET)
+	public void mypage() {
+		logger.info("mypage get.....");
+	}
+	
 }
