@@ -41,4 +41,10 @@ public class HomeController {
 		logger.info("mypage get.....");
 	}
 	
+	
+	@RequestMapping(value="/main", method=RequestMethod.POST)
+	public void mainPage() {
+		
+	}	
+	
 }
