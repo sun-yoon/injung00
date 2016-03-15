@@ -27,9 +27,9 @@
 	<!-- oracle datasource -->
 	<bean id="oracleDatasource" class="oracle.jdbc.pool.OracleDataSource"
 		destroy-method="close">
-		<property name="URL" value="jdbc:oracle:thin:@localhost:1521:sns" />
-		<property name="user" value="web" />
-		<property name="password" value="web" />
+		<property name="URL" value="jdbc:oracle:thin:@192.168.1.6:1521:sns" />
+		<property name="user" value="webdev" />
+		<property name="password" value="webdev" />
 		<property name="connectionCachingEnabled" value="true" />
 		<qualifier value="main-db" />
 	</bean>
