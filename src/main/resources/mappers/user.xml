@@ -7,65 +7,36 @@
 <insert id="create" parameterType="UserVO">
 		<![CDATA[
 		  insert
-		  into member 
-	       values (no_seq.nextval, #{id }, #{password }, #{name }, #{email }, #{gender }, #{birthDate } )	
-		]]>
+          into member 
+          values (seq_mem_snum.nextval, #{id }, #{password }, #{name }, #{email }, #{gender }, #{birthDate }, 0, 0, sysdate )   
+      ]]>
 	</insert>
 	
 	<select id="get" parameterType="map" resultType="UserVO">
 		<![CDATA[
-		select no, id, name, email, gender, birthDate
-		  from member
-		 where id = #{id }
-		   and password = #{password }
+         select mem_snum no, mem_id id, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
+         from member
+         where  mem_id = #{id }
+         and mem_passwd= #{password }
 		]]>					
 	</select>
 
 	<select id="getNo" parameterType="long" resultType="UserVO">
 		<![CDATA[
-		select  no, id, name, email, gender, birthDate
-		  from member
-		 where no = #{no }
+		select mem_snum no, mem_id id, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
+         from member
+		 where mem_snum = #{no }
 		]]>					
 	</select>
 
 	<select id="getId" parameterType="string" resultType="UserVO">
 		<![CDATA[
-		select  no, id, name, email, gender, birthDate
-		  from member
-		 where id = #{id }
+		select mem_snum no, mem_id id, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
+         from member
+		 where mem_id = #{id }
 		]]>					
 	</select>
 	
-	<update id="update"  parameterType="UserVo" >
-		<![CDATA[
-		update member2 
-		   set id = #{id },
-		]]>
-
-		<if test="password != ''">
-		<![CDATA[	
-					password = #{password },
-		]]>
-		</if>
-		<![CDATA[	   
-			   birthDate = #{birthDate },
-		]]> 
-		<![CDATA[	   
-			   email = #{email },
-			   ]]> 
-		<![CDATA[	   
-			   name = #{name },
-			   ]]>  
-		<![CDATA[	   
-			   age = #{age },
-			   ]]>  
-		<![CDATA[	   
-			   phone = #{phone }
-			  
-		 where no = #{no } 
-		]]>
-	</update>
 	
 	
 </mapper>
