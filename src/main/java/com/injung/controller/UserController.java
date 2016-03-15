@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.injung.annotation.AuthUser;
 import com.injung.domain.UserVO;
 import com.injung.service.UserService;
 
@@ -78,14 +79,19 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="/modifyform", method = RequestMethod.GET )
-	public String modifyform(HttpSession session, Model model) throws Exception {
-		UserVO authUser = (UserVO) session.getAttribute("authUser");
-		System.out.println(authUser.getId());
-		service.remove(authUser.getId());
-		session.invalidate();
-		return "redirect:/";
+	public void modifyform(@AuthUser UserVO authUser, Model model) throws Exception {
+		UserVO vo = service.getUser(authUser.getId());
+		model.addAttribute( "vo", vo );
+		
 	}
 	
+	@RequestMapping( value = "/modify", method = RequestMethod.POST )
+	public String modify( @AuthUser UserVO authUser, @ModelAttribute UserVO vo ) throws Exception {
+		vo.setId(authUser.getId());
+		System.out.println(vo);
+		service.modify(vo);
+		return "redirect:/";
+	}
 
 //	
 //	@RequestMapping(value = "/modify", method = RequestMethod.GET)

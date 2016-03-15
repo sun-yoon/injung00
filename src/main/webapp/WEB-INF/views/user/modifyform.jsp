@@ -14,28 +14,25 @@
 					<label class="block-label" for="id">ID</label>
 					<input id="id" name="id" type="text" value="${authUser.id}" disabled>
 					
-					<label class="block-label">?앸뀈?붿씪</label>
-					<input id="birthDate" name="birthDate" type="text"  value="">
 					
-					<label class="block-label">?⑥뒪?뚮뱶</label>
+					<label class="block-label">Password</label>
 					<input name="password" type="password" value="">
 					
-					<label class="block-label">?대찓??/label>
-					<input id="email" name="email" type="text"  value="">
-					
-					<label class="block-label" >?대쫫</label>
+					<label class="block-label">Name</label>
 					<input id="name" name="name" type="text"  value="">
 					
-					<label class="block-label">?섏씠</label>
-					<input id="age" name="age" type="text"  value="">
+					<label class="block-label" >E-Mail</label>
+					<input id="email" name="email" type="text"  value="">
 					
-					<label class="block-label" >踰덊샇</label>
-					<input id="phone" name="phone" type="text"  value="">
+					<label class="block-label">Gender</label>
+					<input id="gender" name="gender" type="text"  value="">
+					
+					<label class="block-label" >Birth-Date</label>
+					<input id="birthDate" name="birthDate" type="text"  value="">
 					
 					
 					
-					
-					<input type="submit" value="?섏젙?섍린">
+					<input type="submit" value="수정">
 					
 				</form>
 			
