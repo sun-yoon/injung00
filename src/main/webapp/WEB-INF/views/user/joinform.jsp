@@ -5,12 +5,25 @@
 <head>
 	<title>Home</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style>
+.fileDrop {
+	width: 120px;
+	height: 160px;
+	border: 1px dotted blue;
+}
+
+small {
+	margin-left: 3px;
+	font-weight: bold;
+	color: gray;
+}
+</style>
 	<script type="text/javascript" src=http://code.jquery.com/jquery-latest.min.js></script>
-	<script type="text/javascript">
-$(function(){
-	$("#id").change( function(){
-		 $("#button-checkid").show();
-		 $("#image-checkid").hide();		
+	<script type="text/javascript">	
+	$(function(){
+		$("#id").change( function(){
+			$("#button-checkid").show();
+		 	$("#image-checkid").hide();		
 	});
 	
 	$( "#button-checkid" ).click( function(){
@@ -49,7 +62,68 @@ $(function(){
 <body>
 <div id="content">
 		<div id="user">
-			<form id="join-form" name="joinform" method="post" action="/user/join">
+			<div class="fileDrop">
+			<div id="profile">
+			프로필 사진을 올리세요.
+			</div>
+			</div><br/>
+			<script>
+			$(".fileDrop").on("dragenter dragover", function(event) {
+				event.preventDefault();
+			});
+			
+			$(".fileDrop").on("drop", function(event) {
+				event.preventDefault();
+				
+				var files = event.originalEvent.dataTransfer.files;
+				var file = files[0];
+				
+				var formData = new FormData();
+				formData.append("file", file);
+				
+				$.ajax({
+					url: '/uploadAjax',
+					data: formData,
+					dataType: 'text',
+					processData: false,
+					contentType: false,
+					type: 'POST',
+					success: function(data){
+						
+						var str = "";
+						if(checkImageType(data)) {
+							str = "<div><a href=/displayFile?fileName="+getImageLink(data)+">"
+								+ "<img src='/displayFile?fileName="+data+"'/>"
+								+ "</a></div>"; 
+						}else {
+							alert("이미지 파일만 가능합니다.");
+						}
+						
+						//$(".profile").append(str);
+						var profile = document.getElementById("profile");
+						profile.innerHTML = str;
+					}
+				});
+			});
+			
+			function checkImageType(fileName) {
+				var pattern = /jpg|gif|png|jpeg/i;
+				
+				return fileName.match(pattern);
+			}
+			
+			function getImageLink(fileName) {
+				if(!checkImageType(fileName)) {
+					return;
+				}
+				var front = fileName.substr(0,12);
+				var end = fileName.substr(14);
+				
+				return front+end;
+			}
+			</script>
+		
+			<form id="join-form" name="joinform" method="post" action="/user/join">			
 			
 			<label class="block-label" for="id">ID</label>
 			<input id="id" name="id" type="text" value="">
