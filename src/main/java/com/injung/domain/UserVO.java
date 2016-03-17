@@ -9,6 +9,7 @@ public class UserVO {
 	private String email;
 	private String gender;
 	private String birthDate;
+	private String profile;
 	
 	public long getNo() {
 		return no;
@@ -51,14 +52,20 @@ public class UserVO {
 	}
 	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
+	}	
+	
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 	
 	@Override
 	public String toString() {
-		return "UserVo [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name + ", email=" + email
-				+ ", gender=" + gender + ", birthDate=" + birthDate + "]";
+		return "UserVO [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name + ", email=" + email
+				+ ", gender=" + gender + ", birthDate=" + birthDate + ", profile=" + profile + "]";
 	}
-	
 	
 	
 }

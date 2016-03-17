@@ -8,7 +8,7 @@
 		<![CDATA[
 		 	 insert
          	 into member 
-          	values (seq_mem_snum.nextval, #{id }, #{password }, #{name }, #{email }, #{gender }, #{birthDate }, 0, 0, sysdate )   
+          	values (seq_mem_snum.nextval, #{id }, #{password }, #{name }, #{email }, #{gender }, #{birthDate }, #{profile }, 0, sysdate )   
      	 ]]>
 	</insert>
 	

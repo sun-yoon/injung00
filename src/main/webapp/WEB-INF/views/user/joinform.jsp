@@ -161,8 +161,7 @@ small {
 					processData: false,
 					contentType: false,
 					type: 'POST',
-					success: function(data){
-						
+					success: function(data){						
 						var str = "";
 						if(checkImageType(data)) {
 							str = "<div><a href=/displayFile?fileName="+getImageLink(data)+">"
@@ -172,7 +171,9 @@ small {
 							alert("이미지 파일만 가능합니다.");
 						}
 						
-						//$(".profile").append(str);
+						var filepath = document.getElementById("Myprofile");
+						filepath.innerHTML = "<input id="+"Myprofile"+" name="+"profile"+" type="+"hidden"+" value="+data+">";
+						
 						var profile = document.getElementById("profile");
 						profile.innerHTML = str;
 					}
@@ -198,6 +199,8 @@ small {
 		
 			<form id="join-form" name="joinform" method="post" action="/user/join" onsubmit="return validate();">			
 			
+			<input id="Myprofile" type="hidden">
+									
 			<label class="block-label" for="id">ID</label>
 			<input id="id" name="id" type="text" value="">
 			<input id="button-checkid" type="button" value="ID 중복체크">
