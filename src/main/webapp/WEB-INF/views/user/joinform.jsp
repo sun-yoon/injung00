@@ -57,6 +57,79 @@ small {
 	   });
 	});
 });
+	$(function(){
+		$("#id").change( function(){
+			 $("#button-checkid").show();
+			 $("#image-checkid").hide();		
+		});
+		
+		$( "#button-checkid" ).click( function(){
+			var id = $("#id").val();
+			if( id == "" ) {
+				return;
+			} 
+			
+			$.ajax( {
+			   url : "/user/checkid?id=" + id,
+			   type: "get",
+			   dataType: "json",
+			   data: "",
+		  //  contentType: "application/json",
+	  	       success: function( response ){
+				 console.log( response );
+				 if(response.data == true) {
+					 $("#id").val( "" );
+					 alert( "이미 존재하는 ID입니다. 다른 ID를 사용해 주세요." );
+					 $("#id").focus();
+					 return;
+				 }
+				 
+				 // 사용 가능한 경우
+				 $("#button-checkid").hide();
+				 $("#image-checkid").show();
+		       },
+			   error: function( jqXHR, status, error ){
+				  console.error( status + " : " + error );
+			   }
+		   });
+		});
+	});
+	
+	function validate(){
+		var f=document.forms[0];
+		
+		if(! f.id.value){ 	
+			alert("아이디를 입력하세요");
+			f.id.focus();
+			return false;
+		}
+
+		if(! f.password.value){ 	
+			alert("비밀번호를 입력하세요");
+			f.password.focus();
+			return false;
+		}
+
+		if(! f.name.value){ 	
+			alert("이름을 입력하세요");
+			f.name.focus();
+			return false;
+		}
+
+		if(! f.email.value){ 	
+			alert("이메일을 입력하세요");
+			f.email.focus();
+			return false;
+		}
+
+		if(! f.birthDate.value){ 	
+			alert("생년월일일 입력하세요");
+			f.birthDate.focus();
+			return false;
+		}
+		
+	}
+
 </script>
 </head>
 <body>
@@ -123,7 +196,7 @@ small {
 			}
 			</script>
 		
-			<form id="join-form" name="joinform" method="post" action="/user/join">			
+			<form id="join-form" name="joinform" method="post" action="/user/join" onsubmit="return validate();">			
 			
 			<label class="block-label" for="id">ID</label>
 			<input id="id" name="id" type="text" value="">
@@ -155,7 +228,8 @@ small {
 					<input id="agree-prov" type="checkbox" name="agreeProv" value="y">
 					<label>서비스 약관에 동의합니다.</label>
 			</fieldset>
-	
+			
+			<input type="reset" value="다시입력">
 			<input type="submit" value="SIGN-UP">
 		
 			</form>

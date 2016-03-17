@@ -33,7 +33,7 @@
 					<input id="birthDate" name="birthDate" type="text" value="${authUser.birthDate}" >
 					
 					
-					
+					<a href="/">취소</a>
 					<input type="submit" value="수정">
 					
 				</form>
