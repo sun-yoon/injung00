@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -31,10 +33,12 @@ public class UserController {
 	@Inject
 	private UserService service;
 	
+	
 	@RequestMapping( value="/joinform", method = RequestMethod.GET )
 	public void joinform(){
 		logger.info("joinform get.....");
 	}
+	
 	
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(UserVO vo, RedirectAttributes rttr) throws Exception {
@@ -49,11 +53,13 @@ public class UserController {
 		return "redirect:/user/joinsuccess";
 	}
 	
+	
 	@RequestMapping( value="/joinsuccess", method = RequestMethod.GET )
 	public void joinSuccess(UserVO vo, Model model) throws Exception {
 		logger.info("joinSuccess get.....");
 	}
 
+	
 	@RequestMapping("checkid")
 	@ResponseBody
 	public Object checkid(@RequestParam("id") String id) throws Exception{
@@ -65,9 +71,11 @@ public class UserController {
 		return map;
 	}
 	
+	
 	@RequestMapping( value="/loginform", method = RequestMethod.GET )
 	public void loginform() throws Exception {
 	}
+	
 	
 	@RequestMapping( value="/remove", method = RequestMethod.GET )
 	public String remove(HttpSession session, Model model) throws Exception {
@@ -78,12 +86,13 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	
 	@RequestMapping( value="/modifyform", method = RequestMethod.GET )
 	public void modifyform(@AuthUser UserVO authUser, Model model) throws Exception {
 		UserVO vo = service.getUser(authUser.getId());
 		model.addAttribute( "vo", vo );
-		
 	}
+	
 	
 	@RequestMapping( value = "/modify", method = RequestMethod.POST )
 	public String modify( @AuthUser UserVO authUser, @ModelAttribute UserVO vo ) throws Exception {
@@ -92,7 +101,30 @@ public class UserController {
 		service.modify(vo);
 		return "redirect:/";
 	}
-
+	
+	
+	@RequestMapping( value="/findidform", method = RequestMethod.GET )
+	public void findidform() throws Exception {
+	}
+	
+	
+	@RequestMapping( value="/findId", method = RequestMethod.POST )
+	public void findID(@ModelAttribute UserVO findUser, Model model) throws Exception {
+		model.addAttribute("findUser", service.findId(findUser));
+	}
+	
+	
+	@RequestMapping( value="/findpwform", method = RequestMethod.GET )
+	public void findpwform() throws Exception {
+	}
+	
+	
+	@RequestMapping( value="/findPw", method = RequestMethod.POST )
+	public void findPw(@ModelAttribute UserVO findUser, Model model) throws Exception {
+		model.addAttribute("findUser", service.findPw(findUser));
+	}
+	
+}
 //	
 //	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 //	public void modify(@RequestParam("no")int no,@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
@@ -106,4 +138,4 @@ public class UserController {
 //		model.addAttribute( "vo", vo );
 //		return "/user/modifyform";
 //	}
-}
+//}

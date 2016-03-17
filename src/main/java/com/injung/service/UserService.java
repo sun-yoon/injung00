@@ -12,6 +12,7 @@ public interface UserService {
 	public UserVO checkId(String id)throws Exception;
 	public void remove(String id)throws Exception;
 	public void modify(UserVO vo)throws Exception;
-
+	public UserVO findId(UserVO vo)throws Exception;
+	public UserVO findPw(UserVO vo)throws Exception;
 	
 }

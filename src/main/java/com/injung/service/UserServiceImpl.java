@@ -53,4 +53,17 @@ public class UserServiceImpl implements UserService{
 	public void modify(UserVO vo) throws Exception {
 		dao.update(vo);
 	}
+
+	@Override
+	public UserVO findId(UserVO vo) throws Exception {
+		UserVO userVO = dao.findId(vo);
+		return userVO;
+	}
+
+	@Override
+	public UserVO findPw(UserVO vo) throws Exception {
+		UserVO userVO = dao.findPw(vo);
+		return userVO;
+	}
+
 }

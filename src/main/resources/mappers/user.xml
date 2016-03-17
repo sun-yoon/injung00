@@ -4,53 +4,80 @@
 
 <mapper namespace="user">
 
-<insert id="create" parameterType="UserVO">
+	<insert id="create" parameterType="UserVO">
 		<![CDATA[
-		  insert
-          into member 
-          values (seq_mem_snum.nextval, #{id }, #{password }, #{name }, #{email }, #{gender }, #{birthDate }, 0, 0, sysdate )   
-      ]]>
+		 	 insert
+         	 into member 
+          	values (seq_mem_snum.nextval, #{id }, #{password }, #{name }, #{email }, #{gender }, #{birthDate }, 0, 0, sysdate )   
+     	 ]]>
 	</insert>
+	
+	
+	<select id="getNo" parameterType="long" resultType="UserVO">
+		<![CDATA[
+			select mem_snum no, mem_id id, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
+         	from member
+		 	where mem_snum = #{no }
+		]]>					
+	</select>
+	
+	<select id="getId" parameterType="string" resultType="UserVO">
+		<![CDATA[
+			select mem_id id, mem_passwd password, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
+         	from member
+		 	where mem_id = #{id }
+		]]>					
+	</select>
 	
 	<select id="get" parameterType="map" resultType="UserVO">
 		<![CDATA[
-         select mem_snum no, mem_id id, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
-         from member
-         where  mem_id = #{id }
-         and mem_passwd= #{password }
+            select mem_snum no, mem_id id, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
+            from member
+            where  mem_id = #{id }
+            and mem_passwd= #{password }
 		]]>					
 	</select>
 
-	<select id="getNo" parameterType="long" resultType="UserVO">
+	<select id="selectMe" parameterType="string" resultType="UserVO">
 		<![CDATA[
-		select mem_snum no, mem_id id, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
-         from member
-		 where mem_snum = #{no }
+            select mem_id id, mem_passwd password, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
+            from member
 		]]>					
 	</select>
 
-	<select id="getId" parameterType="string" resultType="UserVO">
-		<![CDATA[
-		select mem_id id, mem_passwd password, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
-         from member
-		 where mem_id = #{id }
-		]]>					
-	</select>
-	
 	<delete id="delete"  parameterType="string" >
 		<![CDATA[
-		delete from member where mem_id = #{id }
+			delete from member where mem_id = #{id }
 		]]>					
 	</delete>
 	
 	<update id="update" parameterType="string" >
 		<![CDATA[
-		update member 
-		set mem_passwd = #{password }, 	
-		mem_name = #{name }, 
-		mem_email = #{email }, 
-		mem_gender = #{gender }, 
-		mem_birth = #{birthDate } 
-		where mem_id = #{id } ]]>
+			update member 
+			set mem_passwd = #{password }, 	
+			mem_name = #{name }, 
+			mem_email = #{email }, 
+			mem_gender = #{gender }, 
+			mem_birth = #{birthDate } 
+			where mem_id = #{id } ]]>
 	</update>
+	
+	<select id="findId" parameterType="string" resultType="UserVO">
+		<![CDATA[
+            select mem_snum no, mem_id id, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
+            from member
+            where  mem_email = #{email }
+            and mem_name= #{name }
+		]]>	
+	</select>
+	
+	<select id="findPw" parameterType="string" resultType="UserVO">
+		<![CDATA[
+            select mem_snum no, mem_passwd password, mem_id id, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
+            from member
+            where  mem_id = #{id }
+            and mem_email = #{email }
+            and mem_name= #{name }
+		]]>	
+	</select>				
 </mapper>

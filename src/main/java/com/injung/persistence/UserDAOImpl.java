@@ -42,7 +42,7 @@ public class UserDAOImpl implements UserDAO{
 		UserVO userVO = session.selectOne(namespace+".get",vo);
 		return userVO;
 	}
-
+	
 	@Override
 	public void delete(String id)throws Exception{
 		session.delete(namespace+".delete",id);
@@ -54,6 +54,22 @@ public class UserDAOImpl implements UserDAO{
 		session.update(namespace+".update",vo);
 		
 	}
+
+	@Override
+	public UserVO findId(UserVO vo) throws Exception {
+		UserVO userVO = session.selectOne(namespace+".findId",vo);
+		return userVO;
+	}
+
+	@Override
+	public UserVO findPw(UserVO vo) throws Exception {
+		UserVO userVO = session.selectOne(namespace+".findPw",vo);
+		return userVO;
+	}
+
+	
+
+	
 
 
 

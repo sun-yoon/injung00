@@ -16,6 +16,8 @@
 					<c:when test='${empty authUser }'>
 						<li><a href="/user/loginform">로그인</a></li>
 						<li><a href="/user/joinform">회원가입</a></li>
+						<li><a href="/user/findidform">ID 찾기</a></li>
+						<li><a href="/user/findpwform">PW 찾기</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="/user/modifyform">회원정보수정</a></li>

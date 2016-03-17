@@ -26,12 +26,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			return false;
 		}
 		
+		
 		UserVO authUser = (UserVO)session.getAttribute( "authUser" );
 		if( authUser == null ) { //로그인 안함
 			response.sendRedirect( "/user/loginform" );
 			return false;
 		}
-		
 		return true;
 	}
 }

@@ -19,9 +19,10 @@ public class BoardController {
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String mainPage(@AuthUser UserVO uv, Model model) {
 		logger.info("main get.....");
-		
 		return "redirect:/board/list";
 	}	
+	
+	
 	@RequestMapping(value="/board/list", method=RequestMethod.GET)
 	public void list(@AuthUser UserVO uv) {
 		if(uv!=null)

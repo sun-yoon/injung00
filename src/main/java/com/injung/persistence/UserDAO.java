@@ -14,5 +14,8 @@ public interface UserDAO {
 	public UserVO get(UserVO vo)throws Exception;
 	public void delete(String id)throws Exception;
 	public void update(UserVO vo) throws Exception;
+	public UserVO findId(UserVO vo) throws Exception;
+	public UserVO findPw(UserVO vo) throws Exception;
+	
 	
 }
