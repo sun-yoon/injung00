@@ -7,12 +7,91 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원정보수정</title>
+<style>
+.fileDrop {
+	width: 120px;
+	height: 160px;
+	border: 1px dotted blue;
+}
+
+small {
+	margin-left: 3px;
+	font-weight: bold;
+	color: gray;
+}
+</style>
 </head>
 <body>
 
+	<div class="fileDrop">
+			<div id="profile">
+				<img src='/displayFile?fileName=${authUser.profile }'/><br/>
+				수정할 사진을 올리세요.
+			</div>
+			</div><br/>
+			<script type="text/javascript" src=http://code.jquery.com/jquery-latest.min.js></script>
+			<script>
+			$(".fileDrop").on("dragenter dragover", function(event) {
+				event.preventDefault();
+			});
+			
+			$(".fileDrop").on("drop", function(event) {
+				event.preventDefault();
+				
+				var files = event.originalEvent.dataTransfer.files;
+				var file = files[0];
+				
+				var formData = new FormData();
+				formData.append("file", file);
+				
+				$.ajax({
+					url: '/uploadAjax',
+					data: formData,
+					dataType: 'text',
+					processData: false,
+					contentType: false,
+					type: 'POST',
+					success: function(data){						
+						var str = "";
+						if(checkImageType(data)) {
+							str = "<div><a href=/displayFile?fileName="+getImageLink(data)+">"
+								+ "<img src='/displayFile?fileName="+data+"'/>"
+								+ "</a></div>"; 
+						}else {
+							alert("이미지 파일만 가능합니다.");
+						}
+						
+						var filepath = document.getElementById("Myprofile");
+						filepath.innerHTML = "<input id="+"Myprofile"+" name="+"profile"+" type="+"hidden"+" value="+data+">";
+						
+						var profile = document.getElementById("profile");
+						profile.innerHTML = str;
+					}
+				});
+			});
+			
+			function checkImageType(fileName) {
+				var pattern = /jpg|gif|png|jpeg/i;
+				
+				return fileName.match(pattern);
+			}
+			
+			function getImageLink(fileName) {
+				if(!checkImageType(fileName)) {
+					return;
+				}
+				var front = fileName.substr(0,12);
+				var end = fileName.substr(14);
+				
+				return front+end;
+			}
+			</script>
+
 				<form id="modify_form" name="modifyform" action="/user/modify" method="post" >
-				<input type="hidden" name="a" value="modify">
+				
+				<input id="Myprofile" type="hidden">
+				
 					<label class="block-label" for="id">ID</label>
 					<input id="id" name="id" type="text" value="${authUser.id}" disabled>
 					
