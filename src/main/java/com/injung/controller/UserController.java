@@ -101,6 +101,12 @@ public class UserController {
 		System.out.println(vo);
 		service.modify(vo);
 		
+		authUser = service.getUser(vo.getId());
+		
+		System.out.println(authUser);
+		
+		session.setAttribute("authUser", authUser);
+		
 		
 		return "redirect:/";
 	}

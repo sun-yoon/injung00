@@ -64,7 +64,7 @@ small {
 						}
 						
 						var filepath = document.getElementById("Myprofile");
-						filepath.innerHTML = "<input id="+"Myprofile"+" name="+"profile"+" type="+"hidden"+" value="+data+">";
+						filepath.innerHTML = "<input id="+"img"+" name="+"profile"+" type="+"hidden"+" value="+data+">";
 						
 						var profile = document.getElementById("profile");
 						profile.innerHTML = str;
@@ -87,11 +87,49 @@ small {
 				
 				return front+end;
 			}
+			
+			function validate(){
+				var f=document.forms[0];
+				
+				if(! f.password.value){ 	
+					alert("비밀번호를 입력하세요");
+					f.password.focus();
+					return false;
+				}
+
+				if(! f.name.value){ 	
+					alert("이름을 입력하세요");
+					f.name.focus();
+					return false;
+				}
+
+				if(! f.email.value){ 	
+					alert("이메일을 입력하세요");
+					f.email.focus();
+					return false;
+				}
+				
+				if(! f.gender.value){ 	
+					alert("성별을 입력하세요");
+					
+					return false;
+				}
+
+				if(! f.birthDate.value){ 	
+					alert("생년월일일 입력하세요");
+					f.birthDate.focus();
+					return false;
+				}
+				
+			}
+
 			</script>
 
 				<form id="modify_form" name="modifyform" action="/user/modify" method="post" >
 				
-				<input id="Myprofile" name="profile" type="hidden">
+				<div id="Myprofile">
+					<input id="img" name="profile" type="hidden">
+				</div>				
 				
 					<label class="block-label" for="id">ID</label>
 					<input id="id" name="id" type="text" value="${authUser.id}" disabled>
@@ -106,8 +144,11 @@ small {
 					<label class="block-label" >E-Mail</label>
 					<input id="email" name="email" type="text"  value="${authUser.email}">
 					
-					<label class="block-label">Gender</label>
-					<input id="gender" name="gender" type="text" value="${authUser.gender}">
+					<fieldset>
+					<legend>Gender</legend>
+						<label>FEMALE</label> <input type="radio" name="gender" value="female" >
+						<label>MALE</label> <input type="radio" name="gender" value="male">
+					</fieldset>
 					
 					<label class="block-label" >Birth-Date</label>
 					<input id="birthDate" name="birthDate" type="text" value="${fn:substring(authUser.birthDate,0,10)}" >
