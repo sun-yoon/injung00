@@ -90,6 +90,7 @@ public class UserController {
 	@RequestMapping( value="/modifyform", method = RequestMethod.GET )
 	public void modifyform(@AuthUser UserVO authUser, Model model) throws Exception {
 		UserVO vo = service.getUser(authUser.getId());
+		System.out.println(vo);
 		model.addAttribute( "vo", vo );
 	}
 	
@@ -100,11 +101,7 @@ public class UserController {
 		System.out.println(vo);
 		service.modify(vo);
 		
-		authUser = service.getUser(vo.getId());
 		
-		System.out.println(authUser);
-		
-		session.setAttribute("authUser", authUser);
 		return "redirect:/";
 	}
 	

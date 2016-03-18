@@ -15,7 +15,7 @@
 	
 	<select id="getNo" parameterType="long" resultType="UserVO">
 		<![CDATA[
-			select mem_snum no, mem_id id, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
+			select mem_snum no, mem_id id, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate, mem_profile profile
          	from member
 		 	where mem_snum = #{no }
 		]]>					
@@ -23,7 +23,7 @@
 	
 	<select id="getId" parameterType="string" resultType="UserVO">
 		<![CDATA[
-			select mem_id id, mem_passwd password, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate
+			select mem_id id, mem_passwd password, mem_name name, mem_email email, mem_gender gender, mem_birth birthDate, mem_profile profile
          	from member
 		 	where mem_id = #{id }
 		]]>					

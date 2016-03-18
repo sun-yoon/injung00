@@ -91,7 +91,7 @@ small {
 
 				<form id="modify_form" name="modifyform" action="/user/modify" method="post" >
 				
-				<input id="Myprofile" type="hidden">
+				<input id="Myprofile" name="profile" type="hidden">
 				
 					<label class="block-label" for="id">ID</label>
 					<input id="id" name="id" type="text" value="${authUser.id}" disabled>
