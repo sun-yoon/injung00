@@ -26,6 +26,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		String id = request.getParameter( "id" );
 		String password = request.getParameter( "password" );
+		String no = request.getParameter("no");
+		
 		
 		ApplicationContext applicationContext = 
 			WebApplicationContextUtils.getWebApplicationContext( request.getServletContext() );		
@@ -34,6 +36,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		UserVO vo = new UserVO();
 		vo.setId(id);
 		vo.setPassword(password);
+		vo.setNo((Long.parseLong(no)));
 		
 		UserVO authUser = service.login(vo);
 		if( authUser == null ) {
@@ -46,6 +49,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		session.setAttribute( "authUser", authUser );
 		logger.info(id);
 		logger.info(password);
+		logger.info(no);
 		response.sendRedirect( "/" );
 		
 		return false;
