@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="com.injung.domain.UserVO" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 
 <html>
@@ -109,7 +110,7 @@ small {
 					<input id="gender" name="gender" type="text" value="${authUser.gender}">
 					
 					<label class="block-label" >Birth-Date</label>
-					<input id="birthDate" name="birthDate" type="text" value="${authUser.birthDate}" >
+					<input id="birthDate" name="birthDate" type="text" value="${fn:substring(authUser.birthDate,0,10)}" >
 					
 					
 					<a href="/">취소</a>

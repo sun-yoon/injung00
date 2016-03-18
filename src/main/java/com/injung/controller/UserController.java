@@ -95,10 +95,16 @@ public class UserController {
 	
 	
 	@RequestMapping( value = "/modify", method = RequestMethod.POST )
-	public String modify( @AuthUser UserVO authUser, @ModelAttribute UserVO vo ) throws Exception {
+	public String modify( @AuthUser UserVO authUser, @ModelAttribute UserVO vo, HttpSession session) throws Exception {
 		vo.setId(authUser.getId());
 		System.out.println(vo);
 		service.modify(vo);
+		
+		authUser = service.getUser(vo.getId());
+		
+		System.out.println(authUser);
+		
+		session.setAttribute("authUser", authUser);
 		return "redirect:/";
 	}
 	

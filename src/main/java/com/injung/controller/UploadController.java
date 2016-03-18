@@ -59,7 +59,7 @@ public class UploadController {
 			MediaType mType = MediaUtils.getMediaTpye(formatName);
 			HttpHeaders headers = new HttpHeaders();
 			
-			in = new FileInputStream(uploadPath+fileName);
+			in = new FileInputStream(uploadPath+fileName);			
 			
 			if(mType != null) {
 				headers.setContentType(mType);

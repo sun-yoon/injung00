@@ -1,6 +1,7 @@
 package com.injung.service;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -51,7 +52,9 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void modify(UserVO vo) throws Exception {
-		dao.update(vo);
+		dao.update(vo); //db 업데이트
+		
+		//session 업데이트		
 	}
 
 	@Override
